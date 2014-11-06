@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>Setting up GitHub</title>
+
+<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="libs/bootstrap-2.3.2/css/readable.min.css" rel="stylesheet" />
+<link href="libs/bootstrap-2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+
+/* padding for bootstrap navbar */
+body {
+  padding-top: 50px;
+  padding-bottom: 40px;
+}
+@media (max-width: 979px) {
+  body {
+    padding-top: 0;
+  }
+}
+
+/* offset scroll position for anchor links (for fixed navbar)  */
+@media (min-width: 980px) {
+  .section h2 {
+    padding-top: 52px;
+    margin-top: -52px;
+  }
+  .section h3 {
+    padding-top: 52px;
+    margin-top: -52px;
+  }
+}
+
+
+/* don't use link color in navbar */
+.dropdown-menu>li>a {
+  color: black;
+}
+
+/* some padding for disqus */
+#disqus_thread {
+  margin-top: 45px;
+}
+
+</style>
+
+<link rel="stylesheet" href="libs/font-awesome-4.1.0/css/font-awesome.min.css"/>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="libs/highlight/textmate.css"
+      type="text/css" />
+<script src="libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<div class="container-fluid main-container">
+
+
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="/">ARP Documentation</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li class="dropdown">
+            <a href="data_sources" class="dropdown-toggle" data-toggle="dropdown">Data Sources <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+               <li class="nav-header">EPA</li>
+               <li><a href="ampd.html">AMPD</a></li>
+               <li><a href="eia.html">EIA</a></li>
+               <li class="divider"></li>
+               <li class="nav-header">Medicare</li>
+               <li><a href="medicare.html">Medicare</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="datasets" class="dropdown-toggle" data-toggle="dropdown">Datasets <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+               <li><a href="datasets.html">Datasets</a></li>
+            </ul>
+          </li>
+           <li class="dropdown">
+            <a href="r_packages" class="dropdown-toggle" data-toggle="dropdown">R packages <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+               <li><a href="arepa.html">arepa</a></li>
+               <li><a href="daps.html">DAPS</a></li>
+               <li><a href="econepa.html">econepa</a></li>
+               <li><a href="MMediations.html">MMediations</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="help" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+               <li><a href="creating_site.html">Creating this site</a></li>
+               <li><a href="setting_up_github.html">Setting up GitHub</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav pull-right">
+          <a class="btn btn-primary" href="https://github.com/czigler/PowerPlants">
+            <i class="fa fa-github fa-lg"></i>
+            GitHub
+          </a>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+<div id="header">
+<h1 class="title">Setting up GitHub</h1>
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#creating-a-github-account">Creating a GitHub account</a></li>
+<li><a href="#setting-up-git">Setting up Git</a></li>
+<li><a href="#workflow">Workflow</a></li>
+</ul>
+</div>
+
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>Git jargon: <a href="https://help.github.com/articles/github-glossary/">https://help.github.com/articles/github-glossary/</a></p>
+<p>Basics steps:</p>
+<ul>
+<li><p><strong>clone</strong>: copy the remote code repository locally</p></li>
+<li><p><strong>pull</strong>: fetch and merge remote changes</p></li>
+<li><p><strong>commit</strong>: “save” and document your modifications locally</p></li>
+<li><p><strong>push</strong>: “export” your modifications to the remote repository</p></li>
+</ul>
+</div>
+<div id="creating-a-github-account" class="section level2">
+<h2>Creating a GitHub account</h2>
+<p><a href="https://github.com/">https://github.com/</a></p>
+</div>
+<div id="setting-up-git" class="section level2">
+<h2>Setting up Git</h2>
+<p>OS X: <a href="http://git-scm.com/download/mac">http://git-scm.com/download/mac</a></p>
+</div>
+<div id="workflow" class="section level2">
+<h2>Workflow</h2>
+<div id="from-rstudio" class="section level3">
+<h3>From RStudio</h3>
+<p>One of the four default panels has a <code>Git</code> tab.</p>
+<p>Detailed instructions: <a href="http://www.molecularecologist.com/2013/11/using-github-with-r-and-rstudio/">http://www.molecularecologist.com/2013/11/using-github-with-r-and-rstudio/</a></p>
+</div>
+<div id="from-the-github-gui" class="section level3">
+<h3>From the GitHub GUI</h3>
+<p><a href="https://mac.github.com/">https://mac.github.com/</a></p>
+</div>
+<div id="from-the-command-line" class="section level3">
+<h3>From the command line</h3>
+</div>
+</div>
+
+
+<!-- some extra javascript for older browsers -->
+<script type="text/javascript" src="libs/polyfill.js"></script>
+
+<script>
+
+// manage active state of menu based on current page
+$(document).ready(function () {
+
+    // active menu
+    href = window.location.pathname
+    href = href.substr(href.lastIndexOf('/') + 1)
+    $('a[href="' + href + '"]').parent().addClass('active');
+
+    // manage active menu header
+    if (href.startsWith('authoring_'))
+      $('a[href="' + 'authoring' + '"]').parent().addClass('active');
+    else if (href.endsWith('_format.html'))
+      $('a[href="' + 'formats' + '"]').parent().addClass('active');
+    else if (href.startsWith('developer_'))
+      $('a[href="' + 'developer' + '"]').parent().addClass('active');
+
+});
+
+</script>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+
+</body>
+</html>

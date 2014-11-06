@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>Creating this site</title>
+
+<script src="libs/jquery-1.11.0/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="libs/bootstrap-2.3.2/css/readable.min.css" rel="stylesheet" />
+<link href="libs/bootstrap-2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+
+<style type="text/css">
+
+/* padding for bootstrap navbar */
+body {
+  padding-top: 50px;
+  padding-bottom: 40px;
+}
+@media (max-width: 979px) {
+  body {
+    padding-top: 0;
+  }
+}
+
+/* offset scroll position for anchor links (for fixed navbar)  */
+@media (min-width: 980px) {
+  .section h2 {
+    padding-top: 52px;
+    margin-top: -52px;
+  }
+  .section h3 {
+    padding-top: 52px;
+    margin-top: -52px;
+  }
+}
+
+
+/* don't use link color in navbar */
+.dropdown-menu>li>a {
+  color: black;
+}
+
+/* some padding for disqus */
+#disqus_thread {
+  margin-top: 45px;
+}
+
+</style>
+
+<link rel="stylesheet" href="libs/font-awesome-4.1.0/css/font-awesome.min.css"/>
+
+<style type="text/css">code{white-space: pre;}</style>
+<link rel="stylesheet"
+      href="libs/highlight/textmate.css"
+      type="text/css" />
+<script src="libs/highlight/highlight.js"></script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<div class="container-fluid main-container">
+
+
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="/">ARP Documentation</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li class="dropdown">
+            <a href="data_sources" class="dropdown-toggle" data-toggle="dropdown">Data Sources <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+               <li class="nav-header">EPA</li>
+               <li><a href="ampd.html">AMPD</a></li>
+               <li><a href="eia.html">EIA</a></li>
+               <li class="divider"></li>
+               <li class="nav-header">Medicare</li>
+               <li><a href="medicare.html">Medicare</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="datasets" class="dropdown-toggle" data-toggle="dropdown">Datasets <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+               <li><a href="datasets.html">Datasets</a></li>
+            </ul>
+          </li>
+           <li class="dropdown">
+            <a href="r_packages" class="dropdown-toggle" data-toggle="dropdown">R packages <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+               <li><a href="arepa.html">arepa</a></li>
+               <li><a href="daps.html">DAPS</a></li>
+               <li><a href="econepa.html">econepa</a></li>
+               <li><a href="MMediations.html">MMediations</a></li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="help" class="dropdown-toggle" data-toggle="dropdown">Help <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+               <li><a href="creating_site.html">Creating this site</a></li>
+               <li><a href="setting_up_github.html">Setting up GitHub</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="nav pull-right">
+          <a class="btn btn-primary" href="https://github.com/czigler/PowerPlants">
+            <i class="fa fa-github fa-lg"></i>
+            GitHub
+          </a>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+<div id="header">
+<h1 class="title">Creating this site</h1>
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#r-markdown">R Markdown</a></li>
+<li><a href="#preview-with-rstudio">Preview (with RStudio)</a></li>
+<li><a href="#publishing">Publishing</a></li>
+</ul>
+</div>
+
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>This website is written in R Markdown (<a href="http://rmarkdown.rstudio.com/">http://rmarkdown.rstudio.com/</a>). It can be edited and published from RStudio.</p>
+</div>
+<div id="r-markdown" class="section level2">
+<h2>R Markdown</h2>
+<div id="syntax" class="section level3">
+<h3>Syntax</h3>
+<p><a href="http://rmarkdown.rstudio.com/authoring_basics.html">http://rmarkdown.rstudio.com/authoring_basics.html</a></p>
+<p><img src="site_images/markdownOverview.png"/></p>
+</div>
+<div id="r-code" class="section level3">
+<h3>R code</h3>
+<p>R code and plots can be embedded in chunks.</p>
+<p><img src="site_images/markdownChunk.png"/></p>
+<p>R chunk options: <a href="http://yihui.name/knitr/options">http://yihui.name/knitr/options</a></p>
+</div>
+<div id="example" class="section level3">
+<h3>Example</h3>
+<pre class="r"><code>fit &lt;- lm(dist ~ speed, data = cars)
+summary(fit)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = dist ~ speed, data = cars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -29.069  -9.525  -2.272   9.215  43.201 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -17.5791     6.7584  -2.601   0.0123 *  
+## speed         3.9324     0.4155   9.464 1.49e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 15.38 on 48 degrees of freedom
+## Multiple R-squared:  0.6511, Adjusted R-squared:  0.6438 
+## F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
+<pre class="r"><code>plot(fit, 2)</code></pre>
+<p><img src="creating_site_files/figure-html/unnamed-chunk-2-1.png" title="" alt="" width="672" /></p>
+</div>
+</div>
+<div id="preview-with-rstudio" class="section level2">
+<h2>Preview (with RStudio)</h2>
+<div id="page" class="section level3">
+<h3>Page</h3>
+<p><code>Knit HTML</code> button</p>
+</div>
+<div id="site" class="section level3">
+<h3>Site</h3>
+<p>One of the four default panels has a <code>Build</code> tab with a <code>Build All</code> button. It calls a Makefile which performs all the required steps.</p>
+<p><img src="site_images/build_site.png"/></p>
+</div>
+</div>
+<div id="publishing" class="section level2">
+<h2>Publishing</h2>
+<p>One of the four default panels has a <code>Git</code> tab with <code>Pull</code> and <code>Commit</code> buttons.</p>
+<div id="pull" class="section level3">
+<h3>Pull</h3>
+<p><img src="site_images/gitpanel.png"/></p>
+</div>
+<div id="commit" class="section level3">
+<h3>Commit</h3>
+<p>(Don’t forget to build the site and select the files of interest!)</p>
+<p>Provide a short description of the changes you made:</p>
+<p><img src="site_images/gitcommit.png"/></p>
+</div>
+<div id="push" class="section level3">
+<h3>Push</h3>
+<p><img src="site_images/gitpush.png"/></p>
+</div>
+</div>
+
+
+<!-- some extra javascript for older browsers -->
+<script type="text/javascript" src="libs/polyfill.js"></script>
+
+<script>
+
+// manage active state of menu based on current page
+$(document).ready(function () {
+
+    // active menu
+    href = window.location.pathname
+    href = href.substr(href.lastIndexOf('/') + 1)
+    $('a[href="' + href + '"]').parent().addClass('active');
+
+    // manage active menu header
+    if (href.startsWith('authoring_'))
+      $('a[href="' + 'authoring' + '"]').parent().addClass('active');
+    else if (href.endsWith('_format.html'))
+      $('a[href="' + 'formats' + '"]').parent().addClass('active');
+    else if (href.startsWith('developer_'))
+      $('a[href="' + 'developer' + '"]').parent().addClass('active');
+
+});
+
+</script>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+
+</body>
+</html>

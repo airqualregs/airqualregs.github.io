@@ -1,0 +1,71 @@
+---
+title: "Creating this site"
+output:
+  html_document:
+    toc: true
+---
+
+## Overview
+
+This website is written in R Markdown (http://rmarkdown.rstudio.com/).  It can be edited and published from RStudio.
+
+## R Markdown
+
+### Syntax
+
+http://rmarkdown.rstudio.com/authoring_basics.html
+
+<img src="site_images/markdownOverview.png"/>
+
+### R code
+
+R code and plots can be embedded in chunks.
+
+<img src="site_images/markdownChunk.png"/>
+
+R chunk options: http://yihui.name/knitr/options
+
+### Example
+
+```{r}
+fit <- lm(dist ~ speed, data = cars)
+summary(fit)
+```
+
+```{r}
+plot(fit, 2)
+```
+
+## Preview (with RStudio)
+
+### Page
+
+`Knit HTML` button
+
+### Site
+
+One of the four default panels has a `Build` tab with a `Build All` button.  It calls a Makefile which performs all the required steps.
+
+<img src="site_images/build_site.png"/>
+
+## Publishing
+
+One of the four default panels has a `Git` tab with `Pull` and `Commit` buttons.
+
+### Pull
+
+<img src="site_images/gitpanel.png"/>
+
+### Commit
+
+(Don't forget to build the site and select the files of interest!)
+
+Provide a short description of the changes you made:
+
+<img src="site_images/gitcommit.png"/>
+
+### Push
+
+<img src="site_images/gitpush.png"/>
+
+

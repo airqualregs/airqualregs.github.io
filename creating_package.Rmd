@@ -1,0 +1,12 @@
+---
+title: "Creating an R package"
+output:
+  html_document:
+    toc: true
+---
+
+## Overview
+
+Packages are prepopulated on Github.
+
+## 
