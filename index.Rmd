@@ -7,7 +7,7 @@ title: ARP --- Documentation
 R code can be embedded:
 
 ```{r}
-plot(rexp(10), runif(10), col = "blue")
+plot(rexp(1000), rnorm(1000), col = "darkgreen", pch=16)
 ```
 
 LaTeX too:
