@@ -1,0 +1,177 @@
+
+my_subset_monitors <- function(monitors, parameter_code, drop_microscale = TRUE,
+                               monitor_info_file, drop_1hour = TRUE,
+                               observation_percent, no_events_only = TRUE) {
+  # Function that subsets the annual AQS data to acquire a set of monitors with
+  # specific parameter code and other specifications.
+  #
+  # Args:
+  #  monitors:          Annual AQS data.
+  #  parameter_code:    AQS parameter code.
+  #  drop_microscale:   Whether we want to drop monitors with microscale information.
+  #  monitor_info_file
+  #  drop_1hour:        Whether we want to drop sample duration of 1 hour.
+  #  observation_percent: Drop monitors with less than that observed.
+  #  no_events_only:    Drop measurements for event type other than 'No Events'.
+  
+  
+  M <- copy(monitors)
+  # Subsetting data to those with observation percent at least equal to the cutoff
+  # and the correct parameter code.
+  M <- M[Observation.Percent >= observation_percent &
+           Parameter.Code == parameter_code]
+  # Whether we want to drop 1 hour measurements.
+  if (drop_1hour) {
+    M <- subset(M, Sample.Duration != "1 HOUR")
+  }
+  # Keep only measurements with Event.Type == 'No Events'.
+  if (no_events_only) {
+    M <- subset(M, Event.Type == 'No Events')
+  }
+  
+  # Reading in basic monitor information.
+  monitor_info <- fread(monitor_info_file)[, `:=`(V1, NULL)]
+  # Choosing the specific parameter code.
+  monitor_info <- subset(monitor_info, PARAMETER_CODE == parameter_code)
+  
+  # Dropping microscale.
+  if (drop_microscale) {
+    monitor_info <- subset(monitor_info, MEASUREMENT_SCALE != "MICROSCALE")
+  }
+  
+  monitor_info[, `:=`(Monitor, paste(sprintf("%02d", as.numeric(STATE_CODE)),
+                                     sprintf("%03d", as.numeric(COUNTY_CODE)),
+                                     "-", sprintf("%04d", as.numeric(SITE_NUMBER)),
+                                     sep = ""))]
+  # Subsetting monitors to include solely the non-microscale ones.
+  M <- subset(M, Monitor %in% monitor_info$Monitor)
+  
+  print('WARNING: For each monitor, we might still have duplicate measurements.')
+  return(M)
+}
+
+
+check_multiple_measurements <- function(monitors) {
+  # Function that performs a basic - not exhausting - check of whether the data
+  # include multiple observations per monitor. If any monitor includes multiple
+  # measurements, I provide a check of common variables that are different for
+  # different measurement.
+  #
+  # Args:
+  #  monitors: pre-processed AQS data.
+  
+  if (dim(monitors)[1] == length(unique(monitors$Monitor))) {
+    print('Unique measurement for each monitor')
+  } else {
+    # For each monitor how many of these variables are seen.
+    A <- monitors[, list(nPOC = length(unique(POC)),
+                         nDatum = length(unique(Datum)),
+                         nCompl = length(unique(Completeness.Indicator)),
+                         nCert = length(unique(Certification.Indicator))),
+                         by = 'Monitor']
+    
+    wh <- which(apply(A, 2, function(x) length(unique(x))) > 1)
+    if (length(wh) == 1) {
+      print(paste('Common variables -POC, Datum, Completeness.Indicator,
+                  Certification.Indicator, are not the reason of multiple
+                  measurements.'))
+    } else {
+      print(names(A)[wh])
+    }
+  }
+}
+
+
+
+get_temp_monitors <- function(monitors, parameter_code = 68105,
+                              observation_percent = 0) {
+  # Function that uses my_subset_monitors to get the monitor information for
+  # annual temperature data from AQS monitoring sites.
+  #
+  # Args:
+  #  monitors:            AQS data.
+  #  parameter_code:      temperature parameter code. Set to 68105 which
+  #                       corresponds to ambient temperature.
+  #  observation_percent:
+  
+  temp <- my_subset_monitors(monitors = monitors, parameter_code = parameter_code,
+                             drop_microscale = TRUE, drop_1hour = TRUE,
+                             monitor_info_file = "~/Google Drive/ARP/Arepa/monitor_list.csv",
+                             observation_percent = observation_percent,
+                             no_events_only = TRUE)
+  
+  # There are multiple measurements for the same monitor.
+  
+  # If all monitors have measurement with POC = 1, keep only that.
+  if (mean(unique(temp$Monitor) %in% temp$Monitor[temp$POC == 1]) == 1) {
+    print('All temperature monitors have measurement with POC = 1, keeping that.')
+  } else {
+    print(paste('Not all temperature monitors have measurement with POC = 1.',
+                'Keeping the one with smallest POC.'))
+  }
+  # Ordering by monitor and POC and keeping smallest POC.
+  setorderv(temp, c('Monitor', 'POC'))
+  temp <- unique(temp, by = 'Monitor')
+  
+  check_multiple_measurements(temp)
+  
+  return(temp)
+}
+
+
+
+get_ozone_monitors <- function(monitors, parameter_code = 44201,
+                               observation_percent = 50,
+                               pollutant_standard = 2008) {
+  # Function that uses my_subset_monitors to get the monitor information for
+  # annual ozone data from AQS monitoring sites.
+  #
+  # Args:
+  #  monitors:            AQS data.
+  #  parameter_code:      Ozone parameter code. Set to 44201 which corresponds
+  #                       to 8 hr ozone.
+  #  observation_percent: Set to 50%.
+  #  pollutant_standard:  Set to 2008. Could be set to 1997 alternatively.
+  
+  ozone <- my_subset_monitors(monitors = monitors, parameter_code = parameter_code,
+                              drop_microscale = TRUE, drop_1hour = TRUE,
+                              monitor_info_file = "~/Google Drive/ARP/Arepa/monitor_list.csv",
+                              observation_percent = observation_percent,
+                              no_events_only = TRUE)
+  
+  # Keeping information on 2008 pollutant standard.
+  ozone <- subset(ozone, Pollutant.Standard == paste('Ozone 8-Hour',
+                                                     pollutant_standard))
+  
+  # If all monitors have measurement with POC = 1, keep only that.
+  if (mean(unique(ozone$Monitor) %in% ozone$Monitor[ozone$POC == 1]) == 1) {
+    print('All ozone monitors have measurement with POC = 1, keeping that.')
+  } else {
+    print(paste('Not all ozone monitors have measurement with POC = 1.',
+                'Keeping the one with smallest POC.'))
+  }
+  # Ordering by monitor and POC and keeping smallest POC.
+  setorderv(ozone, c('Monitor', 'POC'))
+  ozone <- unique(ozone, by = 'Monitor')
+  
+  check_multiple_measurements(ozone)
+  
+  return(ozone)
+} 
+
+
+
+
+# The functions above can be used in the following setting:
+aqsdat = load_annual_average(years)
+aqsdat = subset(aqsdat, Year == year)
+
+# Getting Temperature data.
+Temp <- get_temp_monitors(monitors = aqsdat)
+setkeyv(Temp, c("Monitor", "Year"))
+setorderv(Temp, c("Monitor", "Year"))
+
+# Getting Ozone data.
+OZ <- get_ozone_monitors(monitors = aqsdat)
+setkeyv(OZ, c("Monitor", "Year"))
+setorderv(OZ, c("Monitor", "Year"))
